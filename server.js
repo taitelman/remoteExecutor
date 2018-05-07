@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const RateLimit = require('express-rate-limit');
+const controller = require('./controller');
 
 var router = express.Router();
 var apiLimiter = new RateLimit({
@@ -11,27 +12,18 @@ var apiLimiter = new RateLimit({
   });
 
 // here we map server URL to a command 
-router.route('/danny/ls').get(doLScommandAsync);
+router.route('/danny/ls').get(controller.doLScommandAsync);
 
 app.use('/', router);
 app.use('/', apiLimiter);
 
-async function doLScommandAsync(req, res) {
-  console.log('going to execute ls -la');
-  const { stdout, stderr } = await exec('ls -la');
-  console.log('stdout:', stdout);
-  console.log('stderr:', stderr);
-  res.json("OK");
-}
 
-function doCommandSync(req, res) {
-  const { stdout, stderr } = execSync('ls');
-  console.log('stdout:', stdout);
-  console.log('stderr:', stderr);
-  res.json("OK");
-}
 
 let port = 3000;
-app.listen(port);
-console.log('danny server is listenning on port:'+port);
+var server =  app.listen(port , function() {
+  let host = server.address().address
+  let port = server.address().port
+  console.log(`danny server is listenning on ${host}:${port}`);
+});
+
 module.exports = app;
