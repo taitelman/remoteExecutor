@@ -1,0 +1,24 @@
+{
+  "name": "remoteexecutor",
+  "version": "1.0.0",
+  "description": "for Danny: remote execute commands",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taitelman/remoteExecutor.git"
+  },
+  "author": "taitelman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taitelman/remoteExecutor/issues"
+  },
+  "homepage": "https://github.com/taitelman/remoteExecutor#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-rate-limit": "^2.11.0"
+  }
+}
